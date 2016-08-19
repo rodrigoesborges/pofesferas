@@ -378,6 +378,6 @@ for ( i in seq( nrow( tabela ) ) ){
 result_2.1.1 <- merge( tabela , allRows )
 
 # take a look at the final table..
-result_2.1.1
+#result_2.1.1
 # ..or export them using one of the techniques discussed on http://twotorials.com
 
