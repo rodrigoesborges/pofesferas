@@ -63,11 +63,11 @@ rm(list = ls(pattern = "despesas_"))
 gc()
 
 ###################### A ser adaptado ------------
-tabela_1.1.12 <-
+cesta_esferas <-
 	function(
 		curCode ,
 		family.level.income = domicilios_trabalhadores ,
-		t_caderneta_despesa_s = t_caderneta_despesa_s ,
+		totais_despesas = totais_despesas ,
 		componentes = componentes ,
 		poststr = poststr
 	){
@@ -76,7 +76,7 @@ tabela_1.1.12 <-
 			componentes[ apply( componentes == curCode , 1 , any ) , 'codigo' ]
 
 		family.expenditures.by.code <- 
-			t_caderneta_despesa_s[ t_caderneta_despesa_s$codigo %in% curCode.plus.subcodes , c( 'codigo' , 'despmes' , 'cod.uc' ) ]
+			totais_despesas[ totais_despesas$codigo %in% curCode.plus.subcodes , c( 'codigo' , 'despmes' , 'cod.uc' ) ]
 
 		family.level.spending <-
 			aggregate( 
@@ -158,17 +158,17 @@ tabela_1.1.12 <-
 
 	
 
-tabela_1.1.12( 
+cesta_esferas( 
 	"1.5" , 
 	domicilios_trabalhadores ,
-	t_caderneta_despesa_s , 
+	totais_despesas , 
 	componentes , 
 	poststr 
 )
-tabela_1.1.12( 
+cesta_esferas( 
 	"1.6" , 
 	domicilios_trabalhadores ,
-	t_caderneta_despesa_s , 
+	totais_despesas , 
 	componentes , 
 	poststr 
 )
@@ -201,10 +201,10 @@ for ( i in seq( nrow( tabela ) ) ){
 	print( tabela[ i , 'top.codigo' ] )
 	
 	curRow <- 
-		tabela_1.1.12( 
+		cesta_esferas( 
 			tabela[ i , 'top.codigo' ] , 
 			domicilios_trabalhadores ,
-			t_caderneta_despesa_s , 
+			totais_despesas , 
 			componentes , 
 			poststr 
 		)
@@ -213,7 +213,7 @@ for ( i in seq( nrow( tabela ) ) ){
 	
 }
 
-result_1.1.12 <- merge( tabela , allRows )
+res_cesta_esferas <- merge( tabela , allRows )
 
-result_1.1.12
+res_cesta_esferas
 
