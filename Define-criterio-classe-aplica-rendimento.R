@@ -167,7 +167,7 @@ rm(t_rendimentos_s)
 gc()
 
 #save household table with new income aggregation criteria
-saveRDS(domicilios_trabalhadores, "t_dom_trab_control.rda")
+save(domicilios_trabalhadores, file = "t_dom_trab_control.rda")
 # Big Function that does most of the work
 tabela_2.1.1 <-
   function(
