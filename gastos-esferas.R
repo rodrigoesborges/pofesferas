@@ -1,11 +1,12 @@
-
+#calculate expenses of workers and non workers -- 
+#needs data exported from script "Define-criterio..."
 options( encoding = "latin1" )		# # only macintosh and *nix users need this line
 
 if ( .Platform$OS.type != 'windows' ) print( 'non-windows users: read this block' )
 
 library(survey)		# load survey package (analyzes complex design surveys)
 library(reshape2)	# load reshape2 package (transposes data frames quickly)
-
+library(dplyr)
 options( survey.lonely.psu = "adjust" )
 load("t_dom_trab_control.rda")
 
@@ -13,24 +14,55 @@ load("2009/poststr.rda")
 
 load( "2009/t_caderneta_despesa_s.rda" )
 
+load("2009/t_despesa_individual_s.rda")
+
+load( "2009/t_despesa_90dias_s.rda")
+
+load("2009/t_despesa_12meses_s.rda")
+
+load("2009/t_despesa_veiculo_s.rda")
+
+
 load( "2009/codigos de alimentacao.rda" )
 
 componentes <- componentes[ componentes$nivel.1 == 1 , ]
 
-t_caderneta_despesa_s <-
-	transform(
-		t_caderneta_despesa_s ,
-		
-		codigo =
-			substr( paste0( prod_num_quadro_grupo_pro , cod_item ) , 1 , 5 ) ,
-		
-		despmes = ( valor_anual_expandido2 / fator_expansao2 ) / 12 ,
-		
-		cod.uc = paste0( cod_uf , num_seq , num_dv , cod_domc , num_uc )
-	)
+# Definimos função para recodificar, recalcular e selecionar apenas dados necessários para as próximas fases
+recod.despesas <- function (tabela = t_despesa_individual_s,
+                            n.cod.qd = "num_quadro",
+                            n.cod.it = "cod_item") 
+                            { tabela <- transform(tabela,
+                                                  codigo = substr(paste0(eval(parse(text = n.cod.qd)),eval(parse(text = n.cod.it))) , 1 , 5) ,
+                                                  despmes = ( valor_anual_expandido2 / fator_expansao2 / 12) ,
+                                                  cod.uc = paste0(cod_uf , num_seq , num_dv , cod_domc , num_uc )
+                                                  )
+                           enxutades<-tabela[,c('cod.uc' , 'codigo' , 'despmes')]
+                            aggregate(despmes ~ cod.uc + codigo,
+                                      enxutades,
+                                      sum)
+  }
+  
+despesas_mensais_col <- recod.despesas(t_caderneta_despesa_s , n.cod.qd = "prod_num_quadro_grupo_pro")
 
-	
-	
+despesas_mensais_ind <- recod.despesas(t_despesa_individual_s)
+
+despesas_90 <- recod.despesas(t_despesa_90dias_s)
+
+despesas_veic <- recod.despesas(t_despesa_veiculo_s)
+
+despesas_12m <- recod.despesas(t_despesa_12meses_s)
+
+rm(list = ls(pattern = "t_de"))
+rm(t_caderneta_despesas_s)
+gc()
+
+totais_despesas <- do.call(rbind , mget(ls(pattern = "despesas_")))
+
+
+rm(list = ls(pattern = "despesas_"))
+gc()
+
+###################### A ser adaptado ------------
 tabela_1.1.12 <-
 	function(
 		curCode ,
