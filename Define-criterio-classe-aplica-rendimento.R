@@ -135,7 +135,7 @@ domicilios_trabalhadores <- merge(domicilio.rendas,
                                   renda_m[, c("cod.uc", "renda_trabalho")],
                                   all.x = TRUE)
 
-# Aqui os NAs com baixa renda foram definidor como trabalhadores
+# Aqui os NAs com baixa renda foram definidos como trabalhadores
 domicilios_trabalhadores[is.na(domicilios_trabalhadores$renda_trabalho) &
                            domicilios_trabalhadores$renda_total <= 2000, "renda_trabalho"] <- 100
 
