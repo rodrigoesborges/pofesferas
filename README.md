@@ -13,4 +13,4 @@ Os demais scripts são exploratórios.
 A pasta RDS contém os arquivos .rds gerados pelos scripts de desenvolvimento.
 
 ### Próximos passos
-1. ?
+1. Gerar estimativa populacional, a partir de "t_dom_trab_control" para n. de famílias trabalhadoras produtivas e não(trabalhadoras produtivas)
