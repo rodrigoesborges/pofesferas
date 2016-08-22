@@ -3,20 +3,18 @@
 library(stringr)
 library(readxl)
 library(dplyr)
-
-# Carrega tabela que traduz itens POF --> SCN
-tradutor <- readxl::read_excel("Tradutor_POF2009_ContasNacionais.xls", skip = 1)
-names(tradutor)[c(1,3)] <- c("codigo7", "codigo_SCN")
-
-tradutor <- tradutor %>%
-  mutate(codigo = substr(codigo7,1,5))
-
-tradutor2 <- tradutor[!duplicated(tradutor$codigo),2:5]
+library(tidyr)
 
 # Carrega tabela com todas as despesas consolidadas gerada da POF
-todas_despesas<-readRDS("todas-despesas-domicilios.rds")
+despesas<-readRDS("todas-despesas-domicilios.rds")
 
+# Carrega tabela que traduz itens POF --> SCN
+tradutor <- read_excel(dir()[grep(pattern = "Tradutor_POF", x = dir())],
+                       sheet = 1 , skip = 1)
 
-despesas_mensais <- todas_despesas[,c('cod.uc','codigo','despmes')]
+tradutor$'Produto POF' <- str_sub(tradutor$'Produto POF' , 1 , 5) 
+names(tradutor)[1] <- "codigo"
+tradutor <- tradutor[!duplicated(tradutor$codigo),]
 
-gastos_SCN <- left_join(despesas_mensais, tradutor2)
+gastos_SCN <- left_join(despesas_mensais, tradutor)
+
