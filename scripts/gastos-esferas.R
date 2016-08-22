@@ -12,7 +12,7 @@ library(stringr)
 
 options( survey.lonely.psu = "adjust" )
 
-load("t_dom_trab_control.rda")
+domicilios_trabalhadores <- readRDS("RDS/t_dom_trab_control.rds")
 
 load("2009/poststr.rda")
 
@@ -27,16 +27,16 @@ load("2009/t_despesa_12meses_s.rda")
 load("2009/t_despesa_veiculo_s.rda")
 
 # Carrega tabela que traduz itens POF --> SCN
-tradutor <- read_excel(dir()[grep(pattern = "Tradutor_POF", x = dir())],
+tradutor <- read_excel(dir(recursive = TRUE)[grep(pattern = "Tradutor_POF",x = dir(recursive = TRUE))],
                        sheet = 1 , skip = 1)
 
 # Tabela de componentes hierarquizada cod68 x cod 20 - dicionário de tradução agregado
 options( encoding = "utf8" )
-componentes <- read.csv("cod68X20componentes-HIERARQ.csv", 
+componentes <- read.csv("tradutores/cod68X20componentes-HIERARQ.csv", 
                         colClasses = c("item68x20" = "character","cod68" = "character"))
 
 # Carrega tabela com códigos POF que não entram inicialmente como Consumo Final das Famílias
-pofnaoconsumo <- read.csv("codigos_semtradutor.csv", stringsAsFactors = FALSE, colClasses = c("x" = "character"))
+pofnaoconsumo <- read.csv("tradutores/codigos_semtradutor.csv", stringsAsFactors = FALSE, colClasses = c("x" = "character"))
 
 # Definimos função para recodificar, recalcular e selecionar apenas dados necessários para as próximas fases
 recod.despesas <- function (tabela = t_despesa_individual_s,
