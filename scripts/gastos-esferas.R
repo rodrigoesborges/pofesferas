@@ -30,12 +30,14 @@ load("2009/t_despesa_veiculo_s.rda")
 tradutor <- read_excel(dir(recursive = TRUE)[grep(pattern = "Tradutor_POF",x = dir(recursive = TRUE))],
                        sheet = 1 , skip = 1)
 
+#acerta codificação para o restante do script
+options( encoding = "utf8" )	
 # Tabela de componentes hierarquizada cod68 x cod 20 - dicionário de tradução agregado
 componentes <- read.csv("tradutores/cod68X20componentes-HIERARQ.csv", 
                         colClasses = c("item68x20" = "character","cod68" = "character"), fileEncoding = "utf-8")
 
 # Carrega tabela com códigos POF que não entram inicialmente como Consumo Final das Famílias
-pofnaoconsumo <- read.csv("tradutores/codigos_semtradutor.csv", stringsAsFactors = FALSE, colClasses = c("x" = "character") , fileEncoding = "latin1")
+pofnaoconsumo <- read.csv("tradutores/codigos_semtradutor.csv", stringsAsFactors = FALSE, colClasses = c("x" = "character"))
 
 # Definimos função para recodificar, recalcular e selecionar apenas dados necessários para as próximas fases
 recod.despesas <- function (tabela = t_despesa_individual_s,
