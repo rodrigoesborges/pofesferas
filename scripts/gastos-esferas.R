@@ -63,7 +63,7 @@ despesas_veic <- recod.despesas(t_despesa_veiculo_s)
 despesas_12m <- recod.despesas(t_despesa_12meses_s)
 
 rm(list = ls(pattern = "t_de"))
-rm(t_caderneta_despesas_s)
+rm(t_caderneta_despesa_s)
 gc()
 
 totais_despesas <- do.call(rbind , mget(ls(pattern = "despesas_")))
