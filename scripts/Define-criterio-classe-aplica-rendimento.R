@@ -24,7 +24,7 @@ load( "2009/t_rendimentos_s.rda" )
 load("2009/t_outros_reci_s.rda")
 
 # Do some recodes
-incomeRecodes <- read.csv("codigos-recodificacao-rendimentos.csv",sep = ";" , as.is = 1:3)
+incomeRecodes <- read.csv("tradutores/codigos-recodificacao-rendimentos.csv",sep = ";" , as.is = 1:3)
 
 incomeRecodes$cod.inc <-gsub(".*\\+.*","50000",incomeRecodes$cod.inc)
 incomeRecodesX <- data.frame()
@@ -167,7 +167,7 @@ rm(t_rendimentos_s)
 gc()
 
 #save household table with new income aggregation criteria
-save(domicilios_trabalhadores, file = "t_dom_trab_control.rda")
+saveRDS(domicilios_trabalhadores, file = "RDS/t_dom_trab_control.rds")
 # Big Function that does most of the work
 tabela_2.1.1 <-
   function(
