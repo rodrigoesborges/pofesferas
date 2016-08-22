@@ -1,0 +1,82 @@
+cod68,cod20,descrição,item68x20
+,A,"Agricultura, pecuária, produção florestal, pesca e aquicultura",1
+0191,A,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1.1
+0192,A,"Pecuária, inclusive o apoio à pecuária",1.2
+0280,A,Produção florestal; pesca e aquicultura,1.3
+,A,Indústria,2
+,B,Indústrias extrativas,2.1
+0580,B,Extração de carvão mineral e de minerais não-metálicos,2.1.1
+0680,B,"Extração de petróleo e gás, inclusive as atividades de apoio",2.1.2
+0791,B,"Extração de minério de ferro, inclusive beneficiamentos e a aglomeração",2.1.3
+0792,B,"Extração de minerais metálicos não-ferrosos, inclusive beneficiamentos",2.1.4
+,C,Indústrias de transformação,2.2
+1091,C,"Abate e produtos de carne, inclusive os produtos do laticínio e da pesca",2.2.1
+1092,C,Fabricação e refino de açúcar,2.2.2
+1093,C,Outros produtos alimentares,2.2.3
+1100,C,Fabricação de bebidas,2.2.4
+1200,C,Fabricação de produtos do fumo,2.2.5
+1300,C,Fabricação de produtos têxteis,2.2.6
+1400,C,Confecção de artefatos do vestuário e acessórios,2.2.7
+1500,C,Fabricação de calçados e de artefatos de couro,2.2.8
+1600,C,Fabricação de produtos da madeira,2.2.9
+1700,C,"Fabricação de celulose, papel e produtos de papel",2.2.10
+1800,C,Impressão e reprodução de gravações,2.2.11
+1991,C,Refino de petróleo e coquerias,2.2.12
+1992,C,Fabricação de biocombustíveis,2.2.13
+2091,C,"Fabricação de químicos orgânicos e inorgânicos, resinas e elastômeros",2.2.14
+2092,C,"Fabricação de defensivos, desinfestantes, tintas e químicos diversos",2.2.15
+2093,C,"Fabricação de produtos de limpeza, cosméticos/perfumaria e higiene pessoal",2.2.16
+2100,C,Fabricação de produtos farmoquímicos e farmacêuticos,2.2.17
+2200,C,Fabricação de produtos de borracha e de material plástico,2.2.18
+2300,C,Fabricação de produtos de minerais não-metálicos,2.2.19
+2491,C,"Produção de ferro-gusa/ferroligas, siderurgia e tubos de aço sem costura",2.2.20
+2492,C,Metalurgia de metais não-ferosos e a fundição de metais,2.2.21
+2500,C,"Fabricação de produtos de metal, exceto máquinas e equipamentos",2.2.22
+2600,C,"Fabricação de equipamentos de informática, produtos eletrônicos e ópticos",2.2.23
+2700,C,Fabricação de máquinas e equipamentos elétricos,2.2.24
+2800,C,Fabricação de máquinas e equipamentos mecânicos,2.2.25
+2991,C,"Fabricação de automóveis, caminhões e ônibus, exceto peças",2.2.26
+2992,C,Fabricação de peças e acessórios para veículos automotores,2.2.27
+3000,C,"Fabricação de outros equipamentos de transporte, exceto veículos automotores",2.2.28
+3180,C,Fabricação de móveis e de produtos de indústrias diversas,2.2.29
+3300,C,"Manutenção, reparação e instalação de máquinas e equipamentos",2.2.30
+3500,D,"Energia elétrica, gás natural e outras utilidades",2.3
+3680,E,"Água, esgoto e gestão de resíduos",2.4
+4180,F,Construção,2.5
+,F,Serviços,3
+,G,Comércio; reparação de veículos automotores e motocicletas,3.1
+4500,G,Comércio e reparação de veículos automotores e motocicletas,3.1.1
+4680,G,"Comércio por atacado e a varejo, exceto veículos automotores",3.1.2
+,H,"Transporte, armazenagem e correio",3.2
+4900,H,Transporte terrestre,3.2.1
+5000,H,Transporte aquaviário,3.2.2
+5100,H,Transporte aéreo,3.2.3
+5280,H,"Armazenamento, atividades auxiliares dos transportes e correio",3.2.4
+,I,Alojamento e alimentação,3.3
+5500,I,Alojamento,3.3.1
+5600,I,Alimentação,3.3.2
+,J,Informação e comunicação,3.4
+5800,J,Edição e edição integrada à impressão,3.4.1
+5980,J,"Atividades de televisão, rádio, cinema e  gravação/edição de som e imagem",3.4.2
+6100,J,Telecomunicações,3.4.3
+6280,J,Desenvolvimento de sistemas e outros serviços de informação,3.4.4
+6480,K,"Intermediação financeira, seguros e previdência complementar",3.5
+6800,L,Atividades imobiliárias,3.6
+,M,"Atividades científicas, profissionais e técnicas",3.7
+6980,M,"Atividades jurídicas, contábeis, consultoria e sedes de empresas ",3.7.1
+7180,M,"Serviços de arquitetura, engenharia, testes/análises técnicas e P & D",3.7.2
+7380,M,"Outras atividades profissionais, científicas e técnicas",3.7.3
+,N,Atividades administrativas e serviços complementares,3.8
+7700,N,Aluguéis não-imobiliários e gestão de ativos de propriedade intelectual,3.8.1
+7880,N,Outras atividades administrativas e serviços complementares,3.8.2
+8000,N,"Atividades de vigilância, segurança e investigação",3.8.3
+8400,O,"Administração pública, defesa e seguridade social",3.9
+,P,Educação,3.10
+8591,P,Educação pública,3.10.1
+8592,P,Educação privada,3.10.2
+,Q,Saúde humana e serviços sociais,3.11
+8691,Q,Saúde pública,3.11.1
+8692,Q,Saúde privada,3.11.2
+9080,R,"Atividades artísticas, criativas e de espetáculos",3.12
+9480,S,Organizações associativas e outros serviços pessoais,3.13
+9700,T,Serviços domésticos,3.14
