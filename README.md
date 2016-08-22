@@ -14,3 +14,6 @@ A pasta RDS contém os arquivos .rds gerados pelos scripts de desenvolvimento.
 
 ### Próximos passos
 1. Gerar estimativa populacional, a partir de "t_dom_trab_control" para n. de famílias trabalhadoras produtivas e não(trabalhadoras produtivas)
+2. Totalizar as tabelas geradas com médias para estimativas de nível de grandeza compatível ao PIB
+3. Replicar o procedimento para POF2003
+4.?
