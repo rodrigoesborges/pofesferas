@@ -114,7 +114,8 @@ gastos_SCN <- gastos_SCN %>% mutate(cod68 = substr(gastos_SCN$`Produto Contas Na
 
 gastos_SCN <- left_join(gastos_SCN,trad.agregado)
 
-
+# Se quiser exportar o objeto com "microdados por família e tipo de despesa compatível com SCN"
+# saveRDS(gastos_SCN,"RDS/microdados_despesas.rds")
 
 
 ###################### Função que gera as estimativas para cada item - semi adaptado ------------
