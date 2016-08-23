@@ -272,5 +272,5 @@ for ( i in seq( nrow( tabela ) ) ){
 
 res_cesta_esferas <- merge( componentes , allRows, all.x = TRUE )
 
-write.csv(res_cesta_esferas[grepl(x=colnames(res_cesta_esferas), pattern="mean|cod|item|des")],"cestaesferaalta.csv")
+#saveRDS(res_cesta_esferas[grepl(x=colnames(res_cesta_esferas), pattern="mean|cod|item|des")],"RDS/cestaesferaalta.rds")
 
