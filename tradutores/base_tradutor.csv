@@ -1,0 +1,22 @@
+cod.novo,Desc,cod.rec
+1,Rendimento total,50000
+1.1,Rendimento do trabalho,50000
+1.1.1, Empregado Privado,53001
+1.1.1, Empregado Público,53002
+1.1.1, Empregado Doméstico,53003
+1.1.1, Empregado Temporário na Área Rural,53004
+1.1.1, Trabalhador Voluntário,53005
+1.1.2, Empregador,53006
+1.1.3, Conta-própria,53007
+1.2,Transferência,50000
+1.2.1,Aposentadoria e pensão do INSS,50000
+1.2.2,Aposentadoria ou pensão da previdência pública,50000
+1.2.3,Aposentadoria ou pensão da previdência privada,50000
+1.2.4,Programas sociais federais,50000
+1.2.5,Pensão alimentícia ou mesada ou doação,50000
+1.2.6,Outras transferências,50000
+1.3,Rendimento de aluguel,50000
+1.4, Aprendiz ou Estagiário,53008
+1.4, Não remunerado em Ajuda a Membro do Domicílio,53009
+1.4, Trabalhador na Produção para o Próprio Consumo,53010
+1.4,Tudo mais da outra tabela,99000
