@@ -24,7 +24,7 @@ sample.pof <-
 pop.totals <- 
   data.frame(
     pos_estrato = unique( x$pos_estrato ) , 
-    Freq = unique( x$tot_pop )
+    Freq = unique( x$tot_unidade_c )
   )
 
 pof.design.pos <-
@@ -44,7 +44,7 @@ domiciliostrab_ntrab_amostra <-
   )
 
 #svytotal pessoas
-pessoastrab_ntrab <-
+tot_dom_trab_ntrab <-
   svyby( 
     ~ one, 
     ~trabalhador.cat , 
