@@ -1,7 +1,8 @@
 # Script to Generate, from Brazil's POF 2008-2003, Average Income by Type 
 # aggregated by class position, not income ranges
 options( encoding = "latin1" )		# # only macintosh and *nix users need this line
-if ( .Platform$OS.type != 'windows' ) print( 'non-windows users: read this block' )
+options( encoding = "utf-8" )
+# if ( .Platform$OS.type != 'windows' ) print( 'non-windows users: read this block' )
 
 
 library(survey)		# load survey package (analyzes complex design surveys)
@@ -15,7 +16,7 @@ options( survey.lonely.psu = "adjust" )
 
 load("2003/t_morador.rda")
 
-load("2009/poststr.rda")
+#load("2009/poststr.rda")
 
 load( "2003/t_domicilio.rda" )
 
@@ -23,14 +24,18 @@ load( "2003/t_rendimentos.rda" )
 
 load("2003/t_outros_reci.rda")
 
+# use old translator for generating same table as 2008-09 script
+tabelagregada <- read.csv2("tradutores/codigos-recodificacao-rendimentos.csv", encoding = "utf-8",
+                          stringsAsFactors = FALSE)
+names(tabelagregada) <- c("cod.novo","tipoderendimento","cod.rec")
 # Do some recodes
 t_domicilio <- t_domicilio %>% mutate(estrato_unico = uf*100 + estrato)
 
 ###############################
-# trocar por tradutor de 2003 #
+# trocado por tradutor de 2003 #
 ###############################
 
-incomeRecodesX <- read.csv("tradutores/base_tradutor.csv",encoding = "UTF-8",
+incomeRecodesX <- read.csv("tradutores/tradutor-detalhado2003-reag.csv",encoding = "UTF-8",
                            stringsAsFactors = FALSE)
 # 
 # incomeRecodes$cod.inc <-gsub(".*\\+.*","50000",incomeRecodes$cod.inc)
@@ -76,8 +81,8 @@ t_outros_reci <-
     cod.uc = paste0( uf , seq , dv , domcl , uc ),
     
     # unique income type code
-   # cod.rec = paste0( quadro, substr(item,1,3))
-     cod.rec = 99000
+    cod.rec = quadro*1000+ floor(item/100)
+    # cod.rec = 99000
   )
 
 t_outros_reci_recoded <- merge (t_outros_reci,incomeRecodesX)
@@ -149,8 +154,9 @@ renda_m_total <- data.frame(lapply(renda_m_total, subst_na),
 names(renda_m_total) <- nomes
 renda_m_total$cod.uc <- as.character(renda_m_total$cod.uc)
 
-renda_m <- renda_m_total %>% mutate(renda_trabalho = ((`1.1.1` + `1.1.3` + 0.01 )/
-                                                        (`1`+ 0.01))*100)
+renda_m <- renda_m_total %>%
+              mutate(renda_trabalho = ((`1.1.1` + `1.1.3` +
+                                          `1.2.6` + `1.2.4` + 0.01 )/(`1`+ 0.01))*100)
 
 domicilios_trabalhadores <- merge(domicilio.rendas, 
                                   renda_m[, c("cod.uc", "renda_trabalho")],
@@ -185,11 +191,12 @@ domicilios_trabalhadores <-
 rm(t_morador)
 rm(t_outros_reci)
 rm(t_rendimentos)
-gc()
 
 #save household table with new income aggregation criteria
 saveRDS(domicilios_trabalhadores, file = "RDS/t_dom_trab_control2003.rds")
 # Big Function that does most of the work
+gc()
+
 tabela_2.1.1 <-
   function(
     # choose an income code
@@ -201,9 +208,10 @@ tabela_2.1.1 <-
     # created above
     allincomes = allincomes ,
     # identify the components table to use
-    componentes = componentes ,
+    componentes = componentes
+    #,
     # identify the table to use for post-stratification
-    poststr = poststr
+#    poststr = poststr
   ){
     
     # isolate all records containing the current code *anywhere*
@@ -255,11 +263,11 @@ tabela_2.1.1 <-
       )
     
     # construct the target population table
-    uc.totals <- 
-      data.frame(
-        pos_estrato = unique( z$pos_estrato ) , 
-        Freq = unique( z$tot_unidade_c )
-      )
+    # uc.totals <- 
+    #   data.frame(
+    #     pos_estrato = unique( z$pos_estrato ) , 
+    #     Freq = unique( z$tot_unidade_c )
+    #   )
     
     # construct the final post-stratified survey object
     pof.design <- sample.pof
@@ -326,8 +334,9 @@ tabela_2.1.1(
   "1.1.1" , 
   domicilios_trabalhadores ,
   allincomes , 
-  componentes , 
-  poststr 
+  componentes
+  #, 
+  #poststr 
 )
 
 # hey why not run one more
@@ -338,8 +347,9 @@ tabela_2.1.1(
   "1.1" , 
   domicilios_trabalhadores ,
   allincomes , 
-  componentes , 
-  poststr 
+  componentes
+  #, 
+  #poststr 
 )
 
 # proper table replication ---------------------------------------------------------------------
@@ -350,17 +360,17 @@ tabela_2.1.1(
 tabela <- data.frame( tipo.de.rendimento = NULL )
 
 # for every row in the `componentes` table...
-for ( i in seq( nrow( componentes ) ) ){
+for ( i in seq( nrow( tabelagregada ) ) ){
   # if the `tipoderendimento` does not yet exist in the `tabela`..
-  if ( !( componentes[ i , 'tipoderendimento' ] %in% tabela$tipo.de.rendimento ) ) {
+  if ( !( tabelagregada[ i , 'tipoderendimento' ] %in% tabela$tipo.de.rendimento ) ) {
     
     # add a new row, and add that `desc.#` to the `tabela` object..
     tabela[ nrow( tabela ) + 1 , 'tipo.de.rendimento' ] <- 
-      componentes[ i , 'tipoderendimento' ]
+      tabelagregada[ i , 'tipoderendimento' ]
     
     # ..and also copy over the current code.
     tabela[ nrow( tabela ) , 'cod.novo' ] <- 
-      componentes[ i , 'cod.novo']
+      tabelagregada[ i , 'cod.novo']
   }
 }
 
@@ -387,8 +397,9 @@ for ( i in seq( nrow( tabela ) ) ){
       tabela[ i , 'cod.novo' ] , 
       domicilios_trabalhadores,
       allincomes , 
-      componentes , 
-      poststr 
+      componentes
+      # ,
+      # poststr
     )
   
   # if it's the first run, make a new `allRows` object.  otherwise, stack it.
