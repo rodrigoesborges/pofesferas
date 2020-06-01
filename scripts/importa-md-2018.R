@@ -11,6 +11,7 @@ arqsconv <- list.files(lugar, pattern = "*.txt")
 transfrda <- function(a) {
   b <- read.delim(paste0(lugar,"/",a), sep = "", header = F)
   save(b, file= paste0(lugar,"/",gsub(".txt","",a),".rda"))
+  cat(paste("Arquivo", a, "processado"))
 }
 
 lapply(arqsconv, transfrda)
